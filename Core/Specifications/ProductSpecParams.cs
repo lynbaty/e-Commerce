@@ -11,7 +11,7 @@ namespace Core.Specifications
 
         public int PageIndex {set; get;} = 1;
 
-        public int _pageSize = 6;
+        public int _pageSize = 50;
 
         public int PageSize {
             get => _pageSize;

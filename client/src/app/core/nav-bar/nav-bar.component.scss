@@ -10,3 +10,14 @@
     top: -12px;
     right: 32px;
 }
+.logo{
+    cursor: pointer;
+}
+
+a.p-2{
+    text-decoration: none;
+    color: rgb(13, 89, 151);
+    &.active{
+        color: orange;
+    }
+}

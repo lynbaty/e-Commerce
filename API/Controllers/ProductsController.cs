@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos.Products;
+using API.Errors;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
@@ -45,8 +46,10 @@ namespace API.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ProductReadDto>> GetId(int id)
         {
+            if(!ModelState.IsValid) return BadRequest(new ApiResponse(400));
             var spec = new ProductWitchTypesandBrandsSpecification(id);
             var product = await _productRepo.GetEntityWithSpec(spec);
+            if(product==null) return BadRequest(new ApiResponse(400));
             return Ok(_mapper.Map<Product,ProductReadDto>(product));
         }
 

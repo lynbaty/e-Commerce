@@ -19,10 +19,10 @@ namespace API.Errors
         {
             return statusCode switch
             {
-                400 => "Not found page you want",
+                404 => "Not found page you want",
                 401 => "You must authentication",
                 500 => "Server is error by Client",
-                404 => "Bad request, so regret",
+                400 => "Bad request, so regret",
                 _ => null
             };
         }

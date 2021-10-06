@@ -73,4 +73,9 @@ export class ShopComponent implements OnInit {
     this.productParams = new ProductParams();
     this.getProducts();
   }
+  onKeySelected(event: any){
+    this.productParams.search = event.value;
+    this.getProducts();
+  }
+
 }

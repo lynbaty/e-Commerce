@@ -10,7 +10,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ShopModule } from './shop/shop.module';
 import { HomeModule } from './home/home.module';
-import { ErrorInterceptor } from './core/errors/error.interceptor';
+import { ErrorInterceptor } from './core/Interceptor/error.interceptor';
+import { BusyInterceptor } from './core/Interceptor/busy.interceptor';
+
 
 
 @NgModule({
@@ -26,10 +28,13 @@ import { ErrorInterceptor } from './core/errors/error.interceptor';
     CoreModule,
     SharedModule,
     ShopModule,
-    HomeModule
+    HomeModule,
+
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+ 
   ],
   bootstrap: [AppComponent]
 })

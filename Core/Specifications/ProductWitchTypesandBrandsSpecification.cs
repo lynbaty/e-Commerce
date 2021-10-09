@@ -35,9 +35,7 @@ namespace Core.Specifications
                     default: break;
                 }
             }
-            
         }
-
         public ProductWitchTypesandBrandsSpecification(int id) : base(x => x.Id == id)
         {
              Includes.Add(p => p.ProductType);

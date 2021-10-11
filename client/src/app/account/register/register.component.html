@@ -1,0 +1,22 @@
+<body>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-4">
+                    <div id="login-box" class="col-md-12">
+                        <form [formGroup]="registerForm" (submit)="onSubmit()" class="form">
+                            <h3 class="text-center text-info">Register</h3>
+                            <app-text-input [label]="'User Name'" formControlName="userName"></app-text-input>
+                            <app-text-input [label]="'Email'" formControlName="email"></app-text-input>
+                            <app-text-input [label]="'Password'" formControlName="password" [type]="'password'"></app-text-input>
+                            <div class="form-group">
+                                <input [disabled]="registerForm.invalid" type="submit" name="submit"
+                                    class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

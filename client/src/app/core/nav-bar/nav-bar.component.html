@@ -1,17 +1,39 @@
 <!-- <ngx-spinner></ngx-spinner> -->
-<div class="fix-top d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white justify-content-between border-bottom box-shadow">
+<div
+    class="fix-top d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white justify-content-between border-bottom box-shadow">
     <img routerLink="/" src="/assets/images/logo1.png" style="max-height: 70px;" alt="logo" class="logo">
-    <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size:larger;" >
-      <a class="p-2" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a class="p-2" routerLink="/shop" routerLinkActive="active">Shop</a>
-      <a class="p-2" routerLink="/test-errors" routerLinkActive="active">Errors</a>
+    <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size:larger;">
+        <a class="p-2" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="p-2" routerLink="/shop" routerLinkActive="active">Shop</a>
+        <a class="p-2" routerLink="/test-errors" routerLinkActive="active">Errors</a>
     </nav>
     <div class="d-flex align-items-center">
         <a routerLink="/basket" class="position-relative">
             <i class="fa fa-shopping-cart  fa-2x mr-5 text-dark"></i>
             <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
         </a>
-        <a class="btn btn-outline-secondary mr-2">Login</a>
-        <a class="btn btn-outline-secondary mr-3">Sign up</a>
+        <div *ngIf="(user$|async) as user; else elseBlock">
+            <div class="btn-group" dropdown>
+                <a dropdownToggle type="button" style="text-decoration: none" class="dropdown-toggle text-muted">
+                    Welcome <strong class="text-info">{{user.userName}}</strong>!
+                </a>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem">
+                        <a class="dropdown-item" routerLink="/basket"><i class="fa fa-shopping-cart"></i> &nbsp; View Cart</a>
+                    </li>
+                    <li role="menuitem">
+                        <a class="dropdown-item" routerLink="/orders"><i class="fa fa-shopping-bag"></i> &nbsp; View Order</a>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem">
+                        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> &nbsp; Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <a routerLink="/account/login" class="btn btn-outline-secondary mr-2">Login</a>
+            <a routerLink="/account/register" class="btn btn-outline-secondary mr-3">Sign up</a>
+        </ng-template>
     </div>
 </div>

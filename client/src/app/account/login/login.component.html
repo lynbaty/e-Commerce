@@ -1,0 +1,26 @@
+<body>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-4">
+                    <div id="login-box" class="col-md-12">
+                        <form [formGroup]="loginForm" (submit)="onSubmit()" class="form">
+                            <h3 class="text-center text-info">Login</h3>
+                            <app-text-input [label]="'email'" formControlName="email"></app-text-input>
+                            <app-text-input [label]="'password'" formControlName="password" [type]="'password'"></app-text-input>
+                           <div class="d-flex justify-content-between">
+                                <div class="form-group">
+                                    <label for="remember" class="text-info"><span>Remember me</span> <span><input id="remember" formControlName="remember" checked name="remember" type="checkbox"></span></label><br>
+                                    <input [disabled]="loginForm.invalid" type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                </div>
+                                <div id="register-link" class="text-right">
+                                    <a routerLink="/account/register" class="text-info">Register here</a>
+                                </div>
+                           </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

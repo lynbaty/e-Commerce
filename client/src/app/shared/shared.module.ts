@@ -3,19 +3,25 @@ import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { OrderTotalComponent } from './components/order-total/order-total.component'
+import { ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 
 
 
 @NgModule({
   declarations: [
-    OrderTotalComponent
+    OrderTotalComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ReactiveFormsModule
   ],
-  exports: [PaginationModule,CarouselModule,OrderTotalComponent]
+  exports: [PaginationModule,CarouselModule,OrderTotalComponent,ReactiveFormsModule,BsDropdownModule,TextInputComponent]
 })
 export class SharedModule { }

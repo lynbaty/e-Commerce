@@ -1,0 +1,17 @@
+<div class="form-group">
+    <label for="{{label}}" class="text-info ">{{label}}</label><br>
+    <input 
+        [ngClass]="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched) ? 'is-invalid' : 'is-valid'"
+        [type]="type" 
+        (input)="onChange1($event)"
+        (blur)="onTouched()"
+        id="{{label}}" 
+        #input
+        class="form-control">
+    <div class="invalid-feedback" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
+        <span class="text-danger" *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
+        <span class="text-danger" *ngIf="controlDir.control.errors?.pattern">{{label}} format is invalid</span>
+        <span class="text-danger" *ngIf="controlDir.control.errors?.minLength">{{label}} not reach to miniumLength</span>
+        <span class="text-danger" *ngIf="controlDir.control.errors?.emailExist">{{label}} is in use</span>
+    </div>
+</div>

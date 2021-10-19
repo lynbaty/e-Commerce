@@ -13,7 +13,10 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using FluentValidation.AspNetCore;
 using API.Validations.Account;
-
+using Core.Interfaces;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 namespace API
 {
     public class Startup
@@ -27,8 +30,9 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ShopContext>(option => option.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<AppIdentityDbContext>(option => option.UseSqlite(_config.GetConnectionString("IdentityConnection")));
+            services.AddSingleton<IResponseCacheService,ResponseCacheService>();
+            services.AddDbContext<ShopContext>(option => option.UseNpgsql(_config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppIdentityDbContext>(option => option.UseNpgsql(_config.GetConnectionString("IdentityConnection")));
             services.AddSingleton<IConnectionMultiplexer>( c => {
                 var Configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"),true);
                 return ConnectionMultiplexer.Connect(Configuration);
@@ -81,6 +85,11 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions{
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(),"Content")
+                ),RequestPath = "/content"
+            });
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
@@ -90,6 +99,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }

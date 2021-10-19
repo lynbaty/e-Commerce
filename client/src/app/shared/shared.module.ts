@@ -6,6 +6,12 @@ import { OrderTotalComponent } from './components/order-total/order-total.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { CdkStepperModule} from '@angular/cdk/stepper';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { BasketTotalComponent } from './components/basket-total/basket-total.component';
+import { RouterModule } from '@angular/router';
+
+
 
 
 
@@ -13,15 +19,21 @@ import { TextInputComponent } from './components/text-input/text-input.component
 @NgModule({
   declarations: [
     OrderTotalComponent,
-    TextInputComponent
+    TextInputComponent,
+    StepperComponent,
+    BasketTotalComponent
   ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkStepperModule,
+    RouterModule
+ 
   ],
-  exports: [PaginationModule,CarouselModule,OrderTotalComponent,ReactiveFormsModule,BsDropdownModule,TextInputComponent]
+  exports: [PaginationModule,CarouselModule,OrderTotalComponent,ReactiveFormsModule,BsDropdownModule,TextInputComponent,
+    BasketTotalComponent,StepperComponent,CdkStepperModule]
 })
 export class SharedModule { }

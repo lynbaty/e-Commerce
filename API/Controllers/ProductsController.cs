@@ -34,6 +34,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+       
         public async Task<ActionResult<Pagination<IReadOnlyList<ProductReadDto>>>> Getall([FromQuery]ProductSpecParams productParams)
         {
             var spec = new ProductWitchTypesandBrandsSpecification(productParams);
@@ -43,7 +44,7 @@ namespace API.Controllers
             var data = _mapper.Map<IReadOnlyList<Product>,IReadOnlyList<ProductReadDto>>(products);
             return Ok(new Pagination<IReadOnlyList<ProductReadDto>>(productParams.PageIndex,productParams.PageSize,count,data));
         }
-
+       
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ProductReadDto>> GetId(int id)
         {
@@ -53,13 +54,13 @@ namespace API.Controllers
             if(product==null) return BadRequest(new ApiResponse(400));
             return Ok(_mapper.Map<Product,ProductReadDto>(product));
         }
-
+     
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetBrands()
         {
             return Ok(await _productBrandRepo.ListAllAsync());
         }
-
+       
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetTypes()
         {

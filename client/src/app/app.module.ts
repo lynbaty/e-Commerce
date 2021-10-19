@@ -12,6 +12,8 @@ import { ShopModule } from './shop/shop.module';
 import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/Interceptor/error.interceptor';
 import { BusyInterceptor } from './core/Interceptor/busy.interceptor';
+import { JwtInterceptor } from './core/Interceptor/jwt.interceptor';
+import { OrderComponent } from './order/order.component';
 
 
 
@@ -33,8 +35,8 @@ import { BusyInterceptor } from './core/Interceptor/busy.interceptor';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
- 
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
